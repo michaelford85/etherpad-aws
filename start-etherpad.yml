@@ -7,5 +7,6 @@
   tasks:
 
   - name: run Etherpad
-    shell: sudo systemctl start etherpad
-    
+    shell: systemctl start etherpad
+    async: 45
+    poll: 0
