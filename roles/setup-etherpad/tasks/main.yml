@@ -64,3 +64,5 @@
 
 - name: run Etherpad
   shell: systemctl start etherpad
+  async: 45
+  poll: 0
