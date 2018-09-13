@@ -1,0 +1,10 @@
+---
+- name: Run Etherpad
+  hosts: ec2
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+    - name: run Etherpad
+      shell: systemctl start etherpad
