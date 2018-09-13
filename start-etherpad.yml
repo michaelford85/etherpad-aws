@@ -8,5 +8,4 @@
 
   - name: run Etherpad
     shell: sudo systemctl start etherpad
-    become: yes
-    become_user: etherpad
+    
