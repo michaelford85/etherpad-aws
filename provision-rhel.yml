@@ -159,6 +159,7 @@
         state: present
         tags:
           Name: "{{ ec2_name_prefix }}-Etherpad"
+          AWSPullTag: "{{ ec2_name_prefix }}"
       with_indexed_items:
         - "{{ node1_output.instance_ids }}"
       when: node1_output.instance_ids is not none

@@ -1,6 +1,6 @@
 ---
 - name: Install Etherpad
-  hosts: rhel-server
+  hosts: ec2
   gather_facts: no
   become: yes
 
