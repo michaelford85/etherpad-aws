@@ -1,0 +1,55 @@
+---
+# tasks file for setup-etherpad
+
+
+- name: ensure a list of packages installed
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gzip
+    - git-core
+    - curl
+    - python
+    - openssl-devel
+
+- name: Install build tools
+  yum:
+    name: "@Development tools"
+    state: latest
+
+- name: Add the user etherpad
+  user:
+    name: etherpad
+    create_home: yes
+
+- name: Add repository
+  shell: curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+  args:
+    warn: no
+
+- name: Install nodejs
+  yum:
+    name: nodejs
+    state: present
+
+- name: Check if etherpad home directory is empty
+  find:
+    paths: /home/etherpad
+    patterns: '*.*'
+  register: foundFiles
+
+- name: debug
+  debug:
+    msg: "Number of files is {{ foundFiles.matched }}"
+
+- name: Clone etherpad repository
+  git:
+    repo: http://github.com/ether/etherpad-lite.git
+    dest: /home/etherpad
+  when: foundFiles.matched > 0
+
+- name: run Etherpad
+  shell: /home/etherpad/etherpad-lite/bin/run.sh
+  become: yes
+  become_user: etherpad
