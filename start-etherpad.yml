@@ -6,5 +6,5 @@
 
   tasks:
 
-    - name: run Etherpad
-      shell: systemctl start etherpad
+  - name: run Etherpad
+    shell: systemctl start etherpad
