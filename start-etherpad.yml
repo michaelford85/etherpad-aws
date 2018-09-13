@@ -7,4 +7,6 @@
   tasks:
 
   - name: run Etherpad
-    shell: systemctl start etherpad
+    shell: sudo systemctl start etherpad
+    become: yes
+    become_user: etherpad
