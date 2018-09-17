@@ -1,0 +1,30 @@
+---
+- name: Install Apache
+  hosts: ec2
+  gather_facts: no
+  become: yes
+
+  tasks:
+
+  - name: install Apache
+    yum:
+      name: httpd
+      state: latest
+
+  - name: run Apache
+    service:
+      name: httpd
+      state: started
+
+  - name: set up index.html
+    file:
+      path: /var/www/html/index.html
+      state: absent
+    notify:
+      - restart_apache
+
+  handlers:
+    - name: restart_apache
+      service:
+        name: httpd
+        state: restarted
