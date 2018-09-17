@@ -1,0 +1,10 @@
+---
+- name: Get Facts from Webservers
+  hosts: ec2
+  gather_facts: yes
+  become: yes
+
+  tasks:
+
+  - name: Ping Webservers
+    ping:
