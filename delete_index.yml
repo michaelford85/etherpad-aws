@@ -1,20 +1,10 @@
 ---
-- name: Install Apache
+- name: Uninstall Apache
   hosts: ec2
   gather_facts: no
   become: yes
 
   tasks:
-
-  - name: install Apache
-    yum:
-      name: httpd
-      state: latest
-
-  - name: run Apache
-    service:
-      name: httpd
-      state: started
 
   - name: set up index.html
     file:
@@ -22,6 +12,16 @@
       state: absent
     notify:
       - restart_apache
+
+  - name: Stop Apache
+    service:
+      name: httpd
+      state: stopped
+
+  - name: Uninstall Apache
+    yum:
+      name: httpd
+      state: absent
 
   handlers:
     - name: restart_apache
