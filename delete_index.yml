@@ -6,12 +6,10 @@
 
   tasks:
 
-  - name: set up index.html
+  - name: Remove index.html
     file:
       path: /var/www/html/index.html
       state: absent
-    notify:
-      - restart_apache
 
   - name: Stop Apache
     service:
@@ -22,9 +20,3 @@
     yum:
       name: httpd
       state: absent
-
-  handlers:
-    - name: restart_apache
-      service:
-        name: httpd
-        state: restarted
