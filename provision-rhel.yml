@@ -159,7 +159,7 @@
         resource: "{{item.1}}"
         state: present
         tags:
-          Name: "{{ ec2_name_prefix }}-Etherpad"
+          Name: "{{ ec2_name_prefix }}"
           AWSPullTag: "{{ ec2_name_prefix }}"
       with_indexed_items:
         - "{{ node1_output.instance_ids }}"
